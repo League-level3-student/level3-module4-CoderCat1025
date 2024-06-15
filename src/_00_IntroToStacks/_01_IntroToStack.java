@@ -9,14 +9,39 @@ public class _01_IntroToStack {
     public static void main(String[] args) {
         // 1. Create a Stack of Doubles
         //    Don't forget to import the Stack class
-
+Stack<Double> doubles = new Stack<>();
         // 2. Use a loop to push 100 random doubles between 0 and 100 to the Stack.
-
+for (int i = 0; i < 100; i++) {
+	Double e = Double.valueOf(new Random().nextInt(101));
+	e = e + new Random().nextDouble();
+	doubles.push(e);
+}
         // 3. Ask the user to enter in two numbers between 0 and 100, inclusive. 
-
-        // 4. Pop all the elements off of the Stack. Every time a double is popped that is
+Double answer = Double.valueOf(JOptionPane.showInputDialog(null, "Enter a number between 0 and 100 (inclusive)."));
+System.out.println("NUM 1: " + answer);
+Double answer2 = Double.valueOf(JOptionPane.showInputDialog(null, "Enter another number between 0 and 100."));
+System.out.println("NUM 2: " + answer2);
+// 4. Pop all the elements off of the Stack. Every time a double is popped that is
         //    between the two numbers entered by the user, print it to the screen.
 
+System.out.println("Popping elements off stack... \n Elements between " + answer + " and " + answer2 + ":");
+if (answer != answer2) {
+for (int i = 0; i < 100; i++) {
+	if (answer > answer2) {
+		Double e = doubles.pop();
+		if (e > answer2 && e < answer) {
+			System.out.println(e);
+		}
+	} else if (answer < answer2) {
+		Double e = doubles.pop();
+		if (e < answer2 && e > answer) {
+			System.out.println(e);
+		}		
+	}
+}
+} else {
+	System.out.println("None. The numbers you chose are the same.");
+}
 
         // EXAMPLE:
         // NUM 1: 65
