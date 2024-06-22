@@ -54,7 +54,7 @@ if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 } else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
 	label.setText(label.getText() + deleted.pop());
 } else {
-	label.setText(label.getText() + String.valueOf(e.));
+	label.setText(label.getText() + String.valueOf(e.getKeyChar()));
 }
 frame.pack();
 }
