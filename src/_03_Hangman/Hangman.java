@@ -16,14 +16,17 @@ public class Hangman implements ActionListener, KeyListener {
 JFrame frame;
 JPanel panel;
 JLabel label;
-Stack<String> words = new Stack<>();
+Stack<String> words;
 JButton button;
+String answer;
+String word;
 
 	void start() {
 		frame = new JFrame();
 		panel = new JPanel();
 		label = new JLabel();
 		button = new JButton();
+		words = new Stack<>();
 		
 		frame.add(panel);
 		panel.add(label);
@@ -39,7 +42,11 @@ JButton button;
 		frame.setTitle("Hangman");
 		frame.pack();
 		
-		String answer = JOptionPane.showInputDialog(null, "How many words do you want to guess? (1-266)");
+		answer = "0";
+		
+		while (Integer.valueOf(answer) < 1 || Integer.valueOf(answer) > 266) {
+		 answer = JOptionPane.showInputDialog(null, "How many words do you want to guess? (1-266)");
+		}
 		
 		for (int i = 0; i < Integer.valueOf(answer); i++) {
 			String e = Utilities.readRandomLineFromFile("dictionary.txt");
@@ -55,13 +62,21 @@ JButton button;
 	}
 	
 	void newRound() {
-		String word = words.pop();
-		String text = word;
+		word = words.pop();
+		StringBuilder text = new StringBuilder(word);
 		
-		label.setText("");
+		text.replace(0, text.length()-1, "-");
 		
-		//find a way to make text a bunch of -'s but with the length of the word
+		label.setText(String.valueOf(text));
 		
+		while (String.valueOf(text).contains("-")) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+					
 		if (!words.isEmpty()) {
 			newRound();
 		} else {
@@ -95,7 +110,9 @@ JButton button;
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+		if (word.contains(String.valueOf(e.getKeyChar()))) {
+			
+		}
 	}
 
 	@Override
