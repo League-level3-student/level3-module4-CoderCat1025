@@ -1,38 +1,49 @@
 package _04_Maze_Maker;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 public class Maze {
-    // 1. Create a 2D array of cells. Don't initialize it.
-    
-    private int rows;
-    private int cols;
+	// 1. Create a 2D array of cells. Don't initialize it.
 
-    public Maze(int rows, int cols) {
-        this.rows = rows;
-        this.cols = cols;
+	Cell[][] cells;
 
-        // 2. Initialize the cells array using the rows and cols variables
+	private int rows;
+	private int cols;
 
-        // 3. Iterate through each cell and initialize it
-        //    using row and col as the cell location
+	public Maze(int rows, int cols) {
+		this.rows = rows;
+		this.cols = cols;
 
-    }
+		// 2. Initialize the cells array using the rows and cols variables
+		for (int i = 0; i < rows; i++) {
+			for (int e = 0; e < cols; e++) {
+				cells[i][e] = new Cell(i, e);
+			}
+		}
+		// 3. Iterate through each cell and initialize it
+		//    using row and col as the cell location
 
-    // 4. This method iterates through the cells and draws them
-    public void draw(Graphics g) {
+	}
 
-    }
+	// 4. This method iterates through the cells and draws them
+	public void draw(Graphics g) {
+		for (int i = 0; i < rows; i++) {
+			for (int e = 0; e < cols; e++) {
+				cells[i][e].draw(g);
+			}
+		}
+	}
 
-    // 5. This method returns the selected cell
-    public Cell getCell(int row, int col){
-        return  null;
-    }
+	// 5. This method returns the selected cell
+	public Cell getCell(int row, int col){
+		return  cells[row][col];
+	}
 
-    public int getRows() {
-        return rows;
-    }
+	public int getRows() {
+		return rows;
+	}
 
-    public int getCols() {
-        return cols;
-    }
+	public int getCols() {
+		return cols;
+	}
 }

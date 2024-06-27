@@ -78,6 +78,7 @@ String word;
 		}
 					
 		if (!words.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "You guessed the hidden word!");
 			newRound();
 		} else {
 			gameWin();
