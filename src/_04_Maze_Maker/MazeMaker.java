@@ -25,25 +25,23 @@ public class MazeMaker {
 		//    finish line.
 		if (new Random().nextInt(2) == 0) {
 			if (new Random().nextInt(2) == 0) {
-				//remember to put in code for the finish line.
-maze.cells[rows-1][new Random().nextInt(cols-1)].setSouthWall(false);
-			} else {
-maze.cells[0][new Random().nextInt(cols-1)].setNorthWall(false);
+				maze.cells[rows-1][new Random().nextInt(cols)].setSouthWall(false);
+				maze.cells[0][new Random().nextInt(cols)].setNorthWall(false);
 
-			}
-		} else {
-			if (new Random().nextInt(2) == 0) {
-				maze.cells[new Random().nextInt(rows-1)][cols-1].setEastWall(false);
 			} else {
-				maze.cells[new Random().nextInt(rows-1)][0].setWestWall(false);
+				if (new Random().nextInt(2) == 0) {
+					maze.cells[new Random().nextInt(rows)][cols-1].setEastWall(false);
+					maze.cells[new Random().nextInt(rows)][0].setWestWall(false);
+				}
 			}
 		}
 
 		// 2. select a random cell in the maze to start 
-
+		selectNextPath(maze.cells[new Random().nextInt(rows)][new Random().nextInt(cols)]);
 		// 3. call the selectNextPath method with the randomly selected cell
 
 		return maze;
+
 	}
 
 	// 4. Complete the selectNextPathMethod
@@ -53,28 +51,31 @@ maze.cells[0][new Random().nextInt(cols-1)].setNorthWall(false);
 		// B. check for unvisited neighbors using the cell
 
 		// C. if has unvisited neighbors,
-
-		// C1. select one at random.
-
-		// C2. push it to the stack
-
-		// C3. remove the wall between the two cells
-
-		// C4. make the new cell the current cell and SET it as visited
-
-		// C5. call the selectNextPath method with the current cell
-
-
+		if (!getUnvisitedNeighbors(currentCell).isEmpty()) {
+			// C1. select one at random.
+			Cell e = (getUnvisitedNeighbors(currentCell).get(new Random().nextInt(getUnvisitedNeighbors(currentCell).size())));
+			// C2. push it to the stack
+			uncheckedCells.push(e);
+			// C3. remove the wall between the two cells
+			removeWalls(e, currentCell);
+			// C4. make the new cell the current cell and SET it as visited
+			currentCell = e;
+			e.setBeenVisited(true);
+			// C5. call the selectNextPath method with the current cell
+			selectNextPath(e);
+		}
 		// D. if all neighbors are visited
+		if (getUnvisitedNeighbors(currentCell).isEmpty()) {
+			// D1. if the stack is not empty
+			if (!uncheckedCells.isEmpty()) {
+				// D1a. pop a cell from the stack
 
-		// D1. if the stack is not empty
-
-		// D1a. pop a cell from the stack
-
-		// D1b. make that the current cell
-
-		// D1c. call the selectNextPath method with the current cell
-
+				// D1b. make that the current cell
+				currentCell = uncheckedCells.pop();
+				// D1c. call the selectNextPath method with the current cell
+				selectNextPath(currentCell);
+			}
+		}
 	}
 
 	// This method will check if c1 and c2 are adjacent.
