@@ -20,6 +20,7 @@ public class Hangman implements ActionListener, KeyListener {
 	JButton button;
 	String answer;
 	String word;
+	StringBuilder text;
 	int lives;
 
 	void start() {
@@ -66,7 +67,7 @@ public class Hangman implements ActionListener, KeyListener {
 
 	void newRound() {
 		word = words.pop();
-		StringBuilder text = new StringBuilder(word);
+		text = new StringBuilder(word);
 
 		text.replace(0, text.length()-1, "-");
 

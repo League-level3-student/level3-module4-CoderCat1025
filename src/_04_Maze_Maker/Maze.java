@@ -14,6 +14,7 @@ public class Maze {
 		this.cols = cols;
 
 		// 2. Initialize the cells array using the rows and cols variables
+		cells = new Cell[rows][cols];
 		for (int i = 0; i < rows; i++) {
 			for (int e = 0; e < cols; e++) {
 				cells[i][e] = new Cell(i, e);
