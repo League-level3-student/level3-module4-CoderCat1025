@@ -69,14 +69,15 @@ public class Hangman implements ActionListener, KeyListener {
 		word = words.pop();
 		text = new StringBuilder(word);
 
-		text.replace(0, text.length()-1, "-");
+		for (int i = 0; i < text.length()-1; i++) {
+			text.replace(i, i+1, "-");
+		}
 
 		label.setText(String.valueOf(text));
 
 		while (String.valueOf(text).contains("-")) {
 
 		}
-
 
 		if (!words.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "You guessed the hidden word!");
